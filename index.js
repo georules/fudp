@@ -27,10 +27,9 @@ if (typeof method === 'undefined' || !methods.includes(method)) {
 
 // we will search on a grid from 0,0 to 100,100
 // this should be changed to be an input
-// MC method currently does not support a grid starting at 0
 
 const grid = [
-  [1,1],
+  [-100,-100],
   [100,100]
 ]
 
@@ -46,8 +45,8 @@ const monte = (inputPoints, grid) => {
   let point = []
   let distances = []
   while(!found) {
-    const x = Math.floor(Math.random() * grid[1][0]) + grid[0][0]
-    const y = Math.floor(Math.random() * grid[1][1]) + grid[0][1]
+    const x = Math.random() * grid[1][0] + grid[0][0]
+    const y = Math.random() * grid[1][1] + grid[0][1]
     const testPoint = [x, y]
     distances = []
     // Assume this is a good testPoint
@@ -60,6 +59,7 @@ const monte = (inputPoints, grid) => {
       }
       distances.push(distance)
     })
+    console.log(testPoint,distances)
   }
   console.log('distances:')
   console.log(distances)
@@ -77,8 +77,9 @@ const gridlinear = (inputPoints, grid) => {
   let y = grid[0][1]
   let dx = 1
   let dy = 1
+  let testPoint = [x,y]
   while ((!found) && (x <= grid[1][0]) && (y <= grid[1][1])) {
-    const testPoint = [x, y]
+    testPoint = [x, y]
     distances = []
     // Assume this is a good testPoint
     found = true
@@ -90,6 +91,7 @@ const gridlinear = (inputPoints, grid) => {
       }
       distances.push(distance)
     })
+    console.log(testPoint,distances)
 
     if (x === grid[1][0]) {
       // reset grid scan x coordinate, increment y
